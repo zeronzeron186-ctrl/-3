@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+
+<html lang="ar">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>رسالة حب</title>
+
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+  body {
+
+    margin: 0;
+
+    padding: 0;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: 'Cairo', sans-serif;
+
+    background: black;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #ffb6c1; /* لون زهري */
+
+  }
+
+  canvas {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+  }
+
+  .message-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 800px;
+
+    text-align: center;
+
+    padding: 20px 30px;
+
+    border-radius: 15px;
+
+    background: rgba(0,0,0,0.4);
+
+    animation: moveText 20s linear infinite;
+
+  }
+
+  .message-container h1 {
+
+    font-size: 2.5rem;
+
+    margin-bottom: 20px;
+
+    text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff69b4;
+
+  }
+
+  .message-container p {
+
+    font-size: 1.3rem;
+
+    line-height: 1.8;
+
+    text-shadow: 0 0 5px #ffb6c1, 0 0 10px #ff69b4;
+
+  }
+
+  .signature {
+
+    margin-top: 30px;
+
+    font-weight: bold;
+
+    font-size: 1.5rem;
+
+    text-shadow: 0 0 10px #ffb6c1;
+
+  }
+
+  @keyframes moveText {
+
+    0% { transform: translateY(100px); opacity: 0; }
+
+    20% { opacity: 1; }
+
+    50% { transform: translateY(0px); }
+
+    80% { opacity: 1; }
+
+    100% { transform: translateY(-100px); opacity: 0; }
+
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="message-container">
+
+  <h1>حبيبتي الغالية</h1>
+
+  <p>
+
+    أريدك أن تعرفي كم أنتِ مهمة بالنسبة لي، وكم يملأ وجودك حياتي بالدفء والفرح. كل لحظة نقضيها معًا تبقى محفورة في قلبي كأجمل الذكريات، وكل ابتسامة منك تجعل يومي أكثر إشراقًا.<br><br>
+
+    أحب فيكِ صدقك وطيبتك وروحك المرحة، وأحب كيف تشعرينني دائمًا بأنني لست وحدي في هذه الحياة. أنتِ أكثر من صديقة، أنتِ نعمة وهبة من السماء، وكل يوم أشكر الله على وجودك في حياتي.<br><br>
+
+    مهما اختلفت الأيام وتباعدت المسافات، سأظل أعتز بكِ وأحبكِ بلا حدود، فأنتِ بالنسبة لي وطن مليء بالحب والأمان.
+
+  </p>
+
+  <div class="signature">مع كل قلبي،<br>[رهف]</div>
+
+</div>
+
+<script>
+
+  const canvas = document.getElementById('starfield');
+
+  const ctx = canvas.getContext('2d');
+
+  let stars = [];
+
+  let width, height;
+
+  function init() {
+
+    width = canvas.width = window.innerWidth;
+
+    height = canvas.height = window.innerHeight;
+
+    stars = [];
+
+    for(let i=0; i<200; i++) {
+
+      stars.push({
+
+        x: Math.random() * width,
+
+        y: Math.random() * height,
+
+        z: Math.random() * width,
+
+        o: Math.random()
+
+      });
+
+    }
+
+  }
+
+  function animate() {
+
+    ctx.fillStyle = 'black';
+
+    ctx.fillRect(0,0,width,height);
+
+    for(let i=0; i<stars.length; i++){
+
+      let star = stars[i];
+
+      star.z -= 2;
+
+      if(star.z <= 0) star.z = width;
+
+      let k = 128.0 / star.z;
+
+      let px = star.x * k + width/2;
+
+      let py = star.y * k + height/2;
+
+      let size = (1 - star.z / width) * 3;
+
+      let alpha = 1 - star.z / width;
+
+      ctx.beginPath();
+
+      ctx.arc(px, py, size, 0, Math.PI * 2);
+
+      ctx.fillStyle = `rgba(255, 182, 193, ${alpha})`; // لون زهري النجوم
+
+      ctx.fill();
+
+    }
+
+    requestAnimationFrame(animate);
+
+  }
+
+  window.addEventListener('resize', init);
+
+  init();
+
+  animate();
+
+</script>
+
+</body>
+
+</html>
+<!-- partial -->
+  
+</body>
+</html>
